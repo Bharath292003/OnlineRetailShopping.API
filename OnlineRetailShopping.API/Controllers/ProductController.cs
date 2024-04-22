@@ -1,4 +1,5 @@
 ﻿using LazyCache;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
@@ -9,6 +10,7 @@ using OnlineRetailShopping.Services.Interface;
 
 namespace OnlineRetailShopping.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase

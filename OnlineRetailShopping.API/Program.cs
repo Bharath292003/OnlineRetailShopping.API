@@ -11,6 +11,7 @@ using OnlineRetailShopping.Services;
 using OnlineRetailShopping.Services.Interface;
 using OnlineRetailShopping.Services.Implementation;
 using System.Text;
+using OnlineRetailShopping.API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -87,6 +88,7 @@ builder.Services.AddScoped<IAuthorizationRepository, AuthorizationRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddTransient<AuthMiddleware>();
 builder.Services.AddMemoryCache();
 builder.Services.AddLazyCache();
 var app = builder.Build();
@@ -107,6 +109,7 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
+app.UseAuthMiddleware();
 app.MapControllers();
 
 
